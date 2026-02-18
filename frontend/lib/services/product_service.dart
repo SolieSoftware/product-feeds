@@ -10,7 +10,7 @@ class ProductResponse {
 }
 
 class ProductService {
-  static const String baseUrl = 'http://localhost:8080';
+  static const String baseUrl = 'http://172.23.239.68:8080';
 
   static Future<ProductResponse> getProducts({String? cursor, int limit = 10}) async {
     var url = '$baseUrl/api/products?limit=$limit';

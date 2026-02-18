@@ -24,6 +24,17 @@ func main() {
 	log.Println("Connected to database successfully")
 
 	r := gin.Default()
+	r.Use(func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Methods", "GET")
+		c.Header("Access-Control-Allow-Headers", "Content-Type")
+		c.Header("Access-Control-Allow-Private-Network", "true")
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+		c.Next()
+	})
 	r.GET("/api/products", handlers.GetProducts)
 	r.Run(":8080")
 }
